@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo timedatectl set-timezone Europe/Kiev
 # Update system
 sudo apt-get update -y
 sudo apt-get upgrade -y
@@ -14,6 +15,7 @@ echo "Nginx installed"
 # Copy project files
 sudo mkdir /var/www/my.polygon
 sudo cp -R /home/vagrant/polygon/* /var/www/my.polygon
+chmod -R 777 /var/www/my.polygon/*
 echo "Project files copy"
 
 sudo apt-get install -y php7.0 php7.0-dev php7.0-cli php7.0-fpm php-mysql php7.0-curl php7.0-gd php7.0-mcrypt php7.0-readline
@@ -38,9 +40,9 @@ sudo apt-get install -y php-mysql
 echo "Mysql-server installed"
 
 sudo ln -s /var/www/my.polygon/provision/nginx.conf  /etc/nginx/sites-enabled/
-#sudo mysql -u vagrant -p1111 vagrant_db < /var/www/my.polygon/provision/polygon_db.sql
+sudo mysql -u vagrant -p1111 polygon_db < /var/www/my.polygon/provision/polygon_db.sql
 sudo apt-get autoremove -y
-sudo service php7.0-fpm restart
+sudo service php7.0-fpm restartto
 sudo service nginx restart
 echo "Server start"
 

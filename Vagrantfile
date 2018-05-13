@@ -71,8 +71,8 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
 
-  # clone projets fies
-  config.vm.synced_folder ".", "/home/vagrant/polygon/"
+  # clone projects fies
+  config.vm.synced_folder ".", "/home/vagrant/polygon/", :mount_options => [ "dmode=777", "fmode=777" ]
 
   config.vm.provision "shell", path: "provision/bootstrap.sh", privileged: true
   config.vm.provision :shell, :inline => "service nginx restart", run: "always"
